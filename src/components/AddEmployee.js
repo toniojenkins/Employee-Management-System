@@ -27,7 +27,7 @@ const AddEmployee = () => {
                 </div>
                 <div className="item-center justify-center h-14 w-full my-4">
                     <label className="block text-gray-600 text-sm font-normal">
-                        Email
+                        Emails
                     </label>
                     <input
                         className="h-10 w-96 border mt-2 px-2 py-2"
