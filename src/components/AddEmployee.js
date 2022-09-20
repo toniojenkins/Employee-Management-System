@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import EmployeeService from '../services/EmployeeService';
 
 const AddEmployee = () => {
@@ -17,16 +18,27 @@ const AddEmployee = () => {
         });
     };
 
+    const reset = (e) => {
+        e.preventDefault();
+        setEmployee({
+            firstName: '',
+            lastName: '',
+            emailId: '',
+        });
+    };
+
     const saveEmployee = (e) => {
         e.preventDefault();
         EmployeeService.saveEmployee(employee)
             .then((res) => {
-                console.log(res);
+                navigate('/employeeList');
             })
             .catch((error) => {
                 console.log(error);
             });
     };
+
+    const navigate = useNavigate();
 
     return (
         <div className="flex max-w-2xl mx-auto shadow border-b">
@@ -77,7 +89,10 @@ const AddEmployee = () => {
                     >
                         Save
                     </button>
-                    <button className="rounded text-white font-semibold bg-red-400 py-2 px-6 hover:bg-red-500">
+                    <button
+                        onClick={reset}
+                        className="rounded text-white font-semibold bg-red-400 py-2 px-6 hover:bg-red-500"
+                    >
                         Clear
                     </button>
                 </div>
