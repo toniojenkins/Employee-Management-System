@@ -34,6 +34,10 @@ const EmployeeList = () => {
         });
     };
 
+    const editEmployee = (e, id) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="container mx-auto my-8">
             <div className="h-12">
