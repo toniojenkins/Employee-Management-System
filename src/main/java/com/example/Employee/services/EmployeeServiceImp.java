@@ -38,10 +38,17 @@ public class EmployeeServiceImp implements EmployeeService {
                 .map(emp -> new Employee(
                         emp.getId(),
                         emp.getFirstName(),
-                        emp.getEmailId(),
+                        emp.getLastName(),
                         emp.getEmailId()
                 )).collect(Collectors.toList());
         return employees;
+    }
+
+    @Override
+    public boolean deleteEmployee(Long id) {
+        EmployeeEntity employee = employeeRepository.findById(id).get();
+        employeeRepository.delete(employee);
+        return true;
     }
 
 }

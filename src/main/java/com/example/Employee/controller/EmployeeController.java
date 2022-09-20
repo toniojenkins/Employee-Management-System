@@ -2,15 +2,19 @@ package com.example.Employee.controller;
 
 import com.example.Employee.modal.Employee;
 import com.example.Employee.services.EmployeeService;
+import org.apache.el.parser.BooleanNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping( "/api/v1")
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000/")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -30,4 +34,13 @@ public class EmployeeController {
         return employeeService.getEmployees();
     }
 
+
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id){
+        boolean deleted = false;
+        deleted = employeeService.deleteEmployee(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", deleted);
+        return ResponseEntity.ok(response);
+    }
 }
